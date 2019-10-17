@@ -1,10 +1,14 @@
-import createStatementData from './createStatementData';
+const createStatementData = require('./createStatementData');
 
 const inv =  require('./invoices.json')[0];
 const p = require('./plays.json');
 
 function statement(invoice, plays) {
     return renderPlainText(createStatementData(invoice, plays));
+}
+
+function htmlStatement(invoice, plays) {
+    return renderHtml(createStatementData(invoice, plays));
 }
 
 function renderPlainText(data, plays) {
@@ -37,5 +41,5 @@ function usd(aNumber) {
         {style: "currency", currency: "USD", minimumFractionDigits: 2}).format(aNumber / 100);
 }
 
-let res = statement(inv, p);
+let res = htmlStatement(inv, p);
 console.log(res);
